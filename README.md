@@ -92,7 +92,7 @@ open IOS/PortWorld.xcodeproj
 
 Edit `SON_BACKEND_BASE_URL` in [`IOS/Info.plist`](IOS/Info.plist):
 
-- iOS Simulator: `http://127.0.0.1:8082`
+- iOS Simulator: `http://172.16.0.104:8082`
 - real iPhone: `http://<YOUR_MAC_LAN_IP>:8082`
 
 Get your Mac LAN IP:
