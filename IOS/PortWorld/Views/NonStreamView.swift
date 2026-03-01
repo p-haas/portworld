@@ -25,21 +25,21 @@ struct NonStreamView: View {
     ZStack {
       BackgroundGradientView()
 
-      ScrollView(showsIndicators: false) {
-        VStack(spacing: 18) {
-          topBar
-          heroCard
-          connectionCard
-          RuntimeStatusPanelView(viewModel: viewModel)
-            .padding(.top, 2)
+      VStack(spacing: 0) {
+        ScrollView(showsIndicators: false) {
+          VStack(spacing: 18) {
+            topBar
+            heroCard
+            connectionCard
+            RuntimeStatusPanelView(viewModel: viewModel)
+              .padding(.top, 2)
+          }
+          .padding(.horizontal, 20)
+          .padding(.vertical, 18)
         }
-        .padding(.horizontal, 20)
-        .padding(.top, 18)
-        .padding(.bottom, 190)
+
+        bottomActionBar
       }
-    }
-    .safeAreaInset(edge: .bottom) {
-      bottomActionBar
     }
     .sheet(isPresented: $wearablesVM.showGettingStartedSheet) {
       if #available(iOS 16.0, *) {
@@ -216,9 +216,9 @@ struct NonStreamView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
     .padding(.horizontal, 16)
-    .padding(.top, 12)
-    .padding(.bottom, 12)
-    .background(Color.black.opacity(0.58))
+    .padding(.top, 16)
+    .padding(.bottom, 8)
+    .background(.ultraThinMaterial)
     .overlay(alignment: .top) {
       Divider()
         .overlay(Color.white.opacity(0.12))
