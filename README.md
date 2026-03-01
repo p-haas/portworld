@@ -8,6 +8,8 @@
   Build for Mistral Worlwide Hackathon 2026
 </p>
 
+\n\n
+
 `Port:🌍` combines an iOS glasses client with a FastAPI backend for voice + vision + tool orchestration.  
 You own the domain logic and prompts; Port provides the runtime, transport, and integration surface.
 
