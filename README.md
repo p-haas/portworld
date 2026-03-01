@@ -4,6 +4,9 @@
   Open-source multimodal framework to plug your AI expertise into the real world through smart glasses.
 </p>
 
+<p align="center">
+  Build for Mistral Worlwide Hackathon 2026
+</p>
 
 `Port:🌍` combines an iOS glasses client with a FastAPI backend for voice + vision + tool orchestration.  
 You own the domain logic and prompts; Port provides the runtime, transport, and integration surface.
