@@ -1,8 +1,0 @@
-# Core runtime dependencies for v1.5.1
-fastapi
-uvicorn[standard]
-httpx
-websockets
-python-dotenv
-python-multipart
-pydantic

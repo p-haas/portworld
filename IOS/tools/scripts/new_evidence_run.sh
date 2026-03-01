@@ -2,7 +2,7 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "$0")/../.." && pwd)"
-EVIDENCE_ROOT="$ROOT_DIR/MetaCollectLuigi/docs/evidence/v4"
+EVIDENCE_ROOT="$ROOT_DIR/PortWorld/docs/evidence/v4"
 RUN_ID="run-$(date +%Y%m%d-%H%M)"
 
 mkdir -p "$EVIDENCE_ROOT/checklists/$RUN_ID" \

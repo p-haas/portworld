@@ -25,7 +25,7 @@ ELEVENLABS_API_KEY = os.getenv("ELEVENLABS_API_KEY")
 ELEVENLABS_VOICE_ID = os.getenv("ELEVENLABS_VOICE_ID", "JBFqnCBsd6RMkjVDRZzb")  # George voice
 GREETING_TEXT = os.getenv("GREETING_TEXT", "Hey Pierre, how can I help you today?")
 
-app = FastAPI(title="MetaCollectLuigi Mock Backend", version="0.1.0")
+app = FastAPI(title="PortWorld Mock Backend", version="0.1.0")
 
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 logger = logging.getLogger("mock-backend")

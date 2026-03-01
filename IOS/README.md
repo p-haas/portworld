@@ -1,10 +1,10 @@
-# MetaCollectLuigi
+# Port:🌍 iOS Client (PortWorld)
 
-**Son of Anton** — An iOS companion app for Meta Ray-Ban Gen 2 smart glasses, enabling hands-free voice-activated workflows with AI-powered visual context.
+**Port:🌍** — iOS client companion for Meta Ray-Ban Gen 2 smart glasses, built to plug real-world AI workflows with voice and vision.
 
 ## Overview
 
-MetaCollectLuigi is designed for professionals who need hands-free assistance while working—initially targeting plumbers who often have their hands occupied. The app leverages Meta Ray-Ban Gen 2 glasses to provide:
+PortWorld is designed for professionals who need hands-free assistance while working—initially targeting plumbers who often have their hands occupied. The app leverages Meta Ray-Ban Gen 2 glasses to provide:
 
 - **Continuous visual context** — Captures frames for real-time scene understanding
 - **Voice-activated queries** — Wake word detection triggers AI assistance
@@ -62,13 +62,13 @@ You'll need to configure the following in your build settings:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/MetaCollectLuigi.git
-   cd MetaCollectLuigi
+   git clone https://github.com/your-username/PortO.git
+   cd PortO/IOS
    ```
 
 2. **Open in Xcode**
    ```bash
-   open MetaCollectLuigi.xcodeproj
+   open PortWorld.xcodeproj
    ```
 
 3. **Configure Meta credentials**
@@ -84,8 +84,8 @@ You'll need to configure the following in your build settings:
 The app follows the **MVVM** (Model-View-ViewModel) pattern with SwiftUI and Combine.
 
 ```
-MetaCollectLuigi/
-├── MetaCollectLuigiApp.swift      # App entry point & SDK configuration
+PortWorld/
+├── PortWorldApp.swift      # App entry point & SDK configuration
 ├── Views/                          # SwiftUI views
 │   ├── MainAppView.swift          # Root navigation controller
 │   ├── HomeScreenView.swift       # Onboarding & connection
@@ -151,7 +151,7 @@ The app requires the following permissions:
 
 ### URL Schemes
 
-- `metacollectluigi://` — Custom scheme for Meta OAuth callback
+- `portworld://` — Custom scheme for Meta OAuth callback
 - `fb-viewapp` — Queried scheme for Meta app detection
 
 ### Background Modes
@@ -167,9 +167,9 @@ The app requires the following permissions:
 
 Additional documentation is available in the `docs/` directory:
 
-- [PRD.md](MetaCollectLuigi/docs/PRD.md) — Product Requirements Document
-- [CONTEXT.md](MetaCollectLuigi/docs/CONTEXT.md) — Project context and background
-- [IMPLEMENTATION_PLAN.md](MetaCollectLuigi/docs/IMPLEMENTATION_PLAN.md) — Technical implementation details
+- [PRD.md](PortWorld/docs/PRD.md) — Product Requirements Document
+- [CONTEXT.md](PortWorld/docs/CONTEXT.md) — Project context and background
+- [IMPLEMENTATION_PLAN.md](PortWorld/docs/IMPLEMENTATION_PLAN.md) — Technical implementation details
 
 ## Local Mock Backend
 
@@ -181,7 +181,7 @@ For v4 reliability loops (tests deferred), use the local Python mock backend:
 
 References:
 - [tools/mock_backend/README.md](tools/mock_backend/README.md)
-- [MetaCollectLuigi/docs/evidence/v4/MOCK_VALIDATION_RUNBOOK.md](MetaCollectLuigi/docs/evidence/v4/MOCK_VALIDATION_RUNBOOK.md)
+- [PortWorld/docs/evidence/v4/MOCK_VALIDATION_RUNBOOK.md](PortWorld/docs/evidence/v4/MOCK_VALIDATION_RUNBOOK.md)
 
 ## Open Source Backend Setup (Lean)
 
@@ -221,7 +221,7 @@ Note: the iOS client currently uses the v4 contracts (`/vision/frame`, `/query`,
 
 ## License
 
-This project is proprietary software. All rights reserved.
+Open-source release target (recommended: Apache-2.0 or MIT).
 
 ## Acknowledgments
 
