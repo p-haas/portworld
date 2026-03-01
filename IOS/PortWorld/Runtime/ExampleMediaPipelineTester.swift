@@ -197,7 +197,7 @@ final class ExampleMediaPipelineTester {
 
     body.appendUTF8("--\(boundary)\r\n")
     body.appendUTF8("Content-Disposition: form-data; name=\"output_format\"\r\n\r\n")
-    body.appendUTF8("pcm_16000\r\n")
+    body.appendUTF8("mp3_44100_128\r\n")
 
     body.appendUTF8("--\(boundary)\r\n")
     body.appendUTF8("Content-Disposition: form-data; name=\"images\"; filename=\"\(media.imageFileName)\"\r\n")
@@ -223,28 +223,54 @@ final class ExampleMediaPipelineTester {
   }
 
   private func playResponseAudio(data: Data, contentType: String?) throws -> Int {
-    do {
-      try audioSession.setCategory(.playback, mode: .default, options: [.allowAirPlay, .allowBluetoothA2DP])
-      try audioSession.setActive(true, options: [])
-    } catch {
-      throw ExampleMediaPipelineError.audioPlaybackFailed
-    }
+    configureAudioSessionForPlayback()
 
     // Try direct playback first (works for mp3/wav containers).
     if let durationMs = tryPlayAudio(data: data) {
       return durationMs
     }
 
-    // If direct playback failed, fallback to raw PCM->WAV wrapping.
+    // Some streams decode better when played from a temp file.
     let type = contentType ?? ""
+    if type.contains("mpeg") || type.contains("mp3") {
+      if let durationMs = tryPlayAudioFromTempFile(data: data, ext: "mp3") {
+        return durationMs
+      }
+    } else if type.contains("wav") {
+      if let durationMs = tryPlayAudioFromTempFile(data: data, ext: "wav") {
+        return durationMs
+      }
+    }
+
+    // If direct playback failed, fallback to raw PCM->WAV wrapping.
     if !type.contains("mpeg") && !type.contains("mp3") {
       let wavData = wrapPCM16MonoAsWAV(pcmData: data, sampleRate: 16_000)
       if let durationMs = tryPlayAudio(data: wavData) {
         return durationMs
       }
+      if let durationMs = tryPlayAudioFromTempFile(data: wavData, ext: "wav") {
+        return durationMs
+      }
     }
 
     throw ExampleMediaPipelineError.audioPlaybackFailed
+  }
+
+  private func configureAudioSessionForPlayback() {
+    // Keep this best-effort. If the app already owns a different audio session setup,
+    // direct playback can still work without forcing a strict category switch.
+    do {
+      try audioSession.setCategory(.playback, mode: .default, options: [.allowAirPlay, .allowBluetoothA2DP])
+      try audioSession.setActive(true, options: [])
+      return
+    } catch {
+      do {
+        try audioSession.setCategory(.playback, mode: .default, options: [])
+        try audioSession.setActive(true, options: [])
+      } catch {
+        return
+      }
+    }
   }
 
   private func tryPlayAudio(data: Data) -> Int? {
@@ -257,6 +283,25 @@ final class ExampleMediaPipelineTester {
     }
     audioPlayer = player
     return Int((player.duration * 1000).rounded())
+  }
+
+  private func tryPlayAudioFromTempFile(data: Data, ext: String) -> Int? {
+    let fileURL = FileManager.default.temporaryDirectory
+      .appendingPathComponent("portworld-backend-audio-\(UUID().uuidString).\(ext)")
+    do {
+      try data.write(to: fileURL, options: [.atomic])
+      let player = try AVAudioPlayer(contentsOf: fileURL)
+      player.prepareToPlay()
+      guard player.play() else {
+        try? FileManager.default.removeItem(at: fileURL)
+        return nil
+      }
+      audioPlayer = player
+      return Int((player.duration * 1000).rounded())
+    } catch {
+      try? FileManager.default.removeItem(at: fileURL)
+      return nil
+    }
   }
 
   private func wrapPCM16MonoAsWAV(pcmData: Data, sampleRate: Int) -> Data {
