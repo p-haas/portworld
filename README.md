@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  Build for Mistral Worlwide Hackathon 2026
+  <b>Build during Mistral Worlwide Hackathon 2026</b>
 </p>
 
 <p align="center">
